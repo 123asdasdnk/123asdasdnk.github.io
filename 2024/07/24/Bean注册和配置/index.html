@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Bean注册和配置 | 花火の绽放</title><meta name="author" content="業火の 向日葵"><meta name="copyright" content="業火の 向日葵"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这里填写摘要。也可以把摘要这一段删去，在文章中想要截断的地方加入，这样在首页就只显示开头到截断的内容，而不会显示全文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bean注册和配置">
+<meta property="og:url" content="https://123asdasdnk.github.io/2024/07/24/Bean%E6%B3%A8%E5%86%8C%E5%92%8C%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="花火の绽放">
+<meta property="og:description" content="这里填写摘要。也可以把摘要这一段删去，在文章中想要截断的地方加入，这样在首页就只显示开头到截断的内容，而不会显示全文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://123asdasdnk.github.io/image/%E9%AC%BC%E5%88%80.jpg">
+<meta property="article:published_time" content="2024-07-23T16:58:04.065Z">
+<meta property="article:modified_time" content="2024-07-23T16:19:07.703Z">
+<meta property="article:author" content="業火の 向日葵">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="IOC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://123asdasdnk.github.io/image/%E9%AC%BC%E5%88%80.jpg"><link rel="shortcut icon" href="/image/icon.png"><link rel="canonical" href="https://123asdasdnk.github.io/2024/07/24/Bean%E6%B3%A8%E5%86%8C%E5%92%8C%E9%85%8D%E7%BD%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Bean注册和配置',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-24 00:19:07'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/source/css/transpancy.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/image/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/image/%E9%AC%BC%E5%88%80.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="花火の绽放"><img class="site-icon" src="/image/icon.png"/><span class="site-name">花火の绽放</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Bean注册和配置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-23T16:58:04.065Z" title="发表于 2024-07-24 00:58:04">2024-07-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-23T16:19:07.703Z" title="更新于 2024-07-24 00:19:07">2024-07-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/Spring/">Spring</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Bean注册和配置"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>前面我们通过一个简单例子体验了一下如何使用Spring来管理我们的对象，并向IoC容器索要被管理的对象。这节课我们就来详细了解一下如何向Spring注册Bean以及Bean的相关配置。</p>
+<p>实际上我们的配置文件可以有很多个，并且这些配置文件是可以相互导入的：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">&quot;test.xml&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是为了简单起见，我们还是从单配置文件开始讲起，首先我们需要知道如何配置Bean并注册。</p>
+<p>要配置一个Bean，只需要添加：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是这样写的话，Spring无法得知我们要配置的Bean到底是哪一个类，所以说我们还得指定对应的类才可以：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.Student&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://image.itbaima.cn/markdown/2022/11/22/SRV3znQJH4A7vDl.png" alt="image-20221122164149924"></p>
+<p>可以看到类的旁边出现了Bean的图标，表示我们的Bean已经注册成功了，这样，我们就可以根据类型向容器索要Bean实例对象了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;test.xml&quot;</span>);</span><br><span class="line">  	<span class="comment">//getBean有多种形式，其中第一种就是根据类型获取对应的Bean</span></span><br><span class="line">  	<span class="comment">//容器中只要注册了对应类的Bean或是对应类型子类的Bean，都可以获取到</span></span><br><span class="line">    <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> context.getBean(Student.class);</span><br><span class="line">    student.hello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>不过在有些时候，Bean的获取可能会出现歧义，我们可以来分别注册两个子类的Bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArtStudent</span> <span class="keyword">extends</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">  	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">art</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我爱画画&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SportStudent</span> <span class="keyword">extends</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sport</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我爱运动&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.ArtStudent&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.SportStudent&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是此时我们在获取Bean时却是索要的它们的父类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> context.getBean(Student.class);</span><br><span class="line">student.hello();</span><br></pre></td></tr></table></figure>
+
+<p>运行时得到如下报错：</p>
+<p><img src="https://image.itbaima.cn/markdown/2022/11/22/vliWJ4SZdx5E6yX.png" alt="image-20221122164100561"></p>
+<p>这里出现了一个Bean定义不唯一异常，很明显，因为我们需要的类型是Student，但是此时有两个Bean定义都满足这个类型，它们都是Student的子类，此时IoC容器不知道给我们返回哪一个Bean，所以就只能抛出异常了。</p>
+<p>因此，如果我们需要一个Bean并且使用类型进行获取，那么必须要指明类型并且不能出现歧义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ArtStudent</span> <span class="variable">student</span> <span class="operator">=</span> context.getBean(ArtStudent.class);</span><br><span class="line">student.art();</span><br></pre></td></tr></table></figure>
+
+<p>那要是两个Bean的类型都是一样的呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean class=<span class="string">&quot;com.test.bean.Student&quot;</span>/&gt;</span><br><span class="line">&lt;bean class=<span class="string">&quot;com.test.bean.Student&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况下，就无法使用Class来进行区分了，除了为Bean指定对应类型之外，我们也可以为Bean指定一个名称用于区分：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">&quot;art&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.ArtStudent&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">&quot;sport&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.SportStudent&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>name属性就是为这个Bean设定一个独一无二的名称（id属性也可以，跟name功能相同，但是会检查命名是否规范，否则会显示黄标），不同的Bean名字不能相同，否则报错：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">&quot;a&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.Student&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">&quot;b&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.Student&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，这两个Bean我们就可以区分出来了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> (Student) context.getBean(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">student.hello();</span><br></pre></td></tr></table></figure>
+
+<p>虽然目前这两Bean定义都是一模一样的，也没什么区别，但是这确实是两个不同的Bean，只是类型一样而已，之后我们还可以为这两个Bean分别设置不同的其他属性。</p>
+<p>我们可以给Bean起名字，也可以起别名，就行我们除了有一个名字之外，可能在家里还有自己的小名：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">&quot;a&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.Student&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">&quot;a&quot;</span> <span class="attr">alias</span>=<span class="string">&quot;test&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，我们使用别名也是可以拿到对应的Bean的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> (Student) context.getBean(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">student.hello();</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p>那么现在又有新的问题了，IoC容器创建的Bean是只有一个还是每次索要的时候都会给我们一个新的对象？我们现在在主方法中连续获取两次Bean对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">student1</span> <span class="operator">=</span> context.getBean(Student.class);</span><br><span class="line"><span class="type">Student</span> <span class="variable">student2</span> <span class="operator">=</span> context.getBean(Student.class);</span><br><span class="line">System.out.println(student1 == student2);   <span class="comment">//默认为单例模式，对象始终为同一个</span></span><br></pre></td></tr></table></figure>
+
+<p><em>我们发现，最后得到的结果为true，那么说明每次从IoC容器获取到的对象，始终都是同一个，默认情况下，通过IoC容器进行管理的Bean都是单例模式的，这个对象只会被创建一次。</em></p>
+<p>如果我们希望每次拿到的对象都是一个新的，我们也可以将其作用域(scope)进行修改：<br>添加scope属性（是不是在maven依赖里面也有这个东西，决定依赖什么时候生效的）</p>
+<p>![[Pasted image 20240709175458.png]]</p>
+<p>这里一共有两种作用域，第一种是<code>singleton</code>，默认情况下就是这一种，当然还有<code>prototype</code>，表示为原型模式（为了方便叫多例模式也行）这种模式每次得到的对象都是一个新的：</p>
+<p><em>singleton为单例模式，prototype是多例模式(原型模式)</em></p>
+<p>换成多例模式(原型模式)<br>![[Pasted image 20240709175714.png]]</p>
+<p>![[Pasted image 20240709175748.png]]<br>发现，已经不在是同一个对象了</p>
+<hr>
+<p>实际上，当Bean的作用域为单例模式时，那么它会在一开始（容器加载配置时）就被创建，我们之后拿到的都是这个对象。而处于原型模式下，只有在获取时才会被创建，也就是说，单例模式下，Bean会被IoC容器存储，只要容器没有被销毁，那么此对象将一直存在，而原型模式才是相当于在要用的时候直接new了一个对象，并不会被保存。</p>
+<p>单例模式下，默认bean一开始就加载，原型模式下，获取时才会创建</p>
+<p>如果想让单例模式下，要让bean获取时才加载，看下面</p>
+<hr>
+<p>当然，如果我们希望单例模式下的Bean不用再一开始就加载，而是一样等到需要时再加载（加载后依然会被容器存储，之后一直使用这个对象了，不会再创建新的）我们也可以<em>开启懒加载</em>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.Student&quot;</span> <span class="attr">lazy-init</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>开启懒加载后，只有在真正第一次使用时才会创建对象。</p>
+<p>因为单例模式下Bean是由IoC容器加载，但是加载顺序我们并不清楚，如果我们需要维护Bean的加载顺序（比如某个Bean必须要在另一个Bean之前创建）那么我们可以使用<code>depends-on</code>来设定前置加载Bean，这样被依赖的Bean一定会在之前加载，比如Teacher应该在Student之前加载：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">&quot;teacher&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.Teacher&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">&quot;student&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.test.bean.Student&quot;</span> <span class="attr">depends-on</span>=<span class="string">&quot;teacher&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就可以保证Bean的加载顺序了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://123asdasdnk.github.io">業火の 向日葵</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://123asdasdnk.github.io/2024/07/24/Bean%E6%B3%A8%E5%86%8C%E5%92%8C%E9%85%8D%E7%BD%AE/">https://123asdasdnk.github.io/2024/07/24/Bean%E6%B3%A8%E5%86%8C%E5%92%8C%E9%85%8D%E7%BD%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://123asdasdnk.github.io" target="_blank">花火の绽放</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring/">Spring</a><a class="post-meta__tags" href="/tags/IOC/">IOC</a></div><div class="post_share"><div class="social-share" data-image="/image/%E9%AC%BC%E5%88%80.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/24/Spring%E7%9A%84xml%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/" title="Spring的xml配置使用"><img class="cover" src="/image/%E6%B5%B7.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Spring的xml配置使用</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/24/IoC%E7%90%86%E8%AE%BA%E4%BB%8B%E7%BB%8D/" title="IoC理论介绍"><img class="cover" src="/image/%E9%AC%BC%E5%88%80.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">IoC理论介绍</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/07/24/IoC%E7%90%86%E8%AE%BA%E4%BB%8B%E7%BB%8D/" title="IoC理论介绍"><img class="cover" src="/image/%E9%AC%BC%E5%88%80.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-24</div><div class="title">IoC理论介绍</div></div></a></div><div><a href="/2024/07/24/Spring%E7%9A%84%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8/" title="Spring注解使用"><img class="cover" src="/image/%E6%99%9A%E9%9C%9E.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-24</div><div class="title">Spring注解使用</div></div></a></div><div><a href="/2024/07/24/Spring%E7%9A%84xml%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/" title="Spring的xml配置使用"><img class="cover" src="/image/%E6%B5%B7.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-24</div><div class="title">Spring的xml配置使用</div></div></a></div><div><a href="/2024/07/24/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" title="使用注解开发"><img class="cover" src="/image/%E6%B5%B7.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-24</div><div class="title">使用注解开发</div></div></a></div><div><a href="/2024/07/24/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" title="依赖注入"><img class="cover" src="/image/%E5%86%B2%E6%B5%AA.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-24</div><div class="title">依赖注入</div></div></a></div><div><a href="/2024/07/24/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%B7%A5%E5%8E%82Bean/" title="工厂模式和工厂Bean"><img class="cover" src="/image/%E5%8A%A8%E6%BC%AB1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-24</div><div class="title">工厂模式和工厂Bean</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/image/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">業火の 向日葵</div><div class="author-info__description">烟花绽放瞬间，绚烂的是花火还是我们</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/123asdasdnk" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客，请随便看看</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0AOP/" title="使用注解实现AOP"><img src="/image/%E9%AC%BC%E5%88%80.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用注解实现AOP"/></a><div class="content"><a class="title" href="/2024/07/24/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0AOP/" title="使用注解实现AOP">使用注解实现AOP</a><time datetime="2024-07-23T16:58:15.108Z" title="发表于 2024-07-24 00:58:15">2024-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AExml%E5%AE%9E%E7%8E%B0AOP/" title="使用配置xml实现AOP"><img src="/image/%E9%AC%BC%E5%88%80.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用配置xml实现AOP"/></a><div class="content"><a class="title" href="/2024/07/24/%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AExml%E5%AE%9E%E7%8E%B0AOP/" title="使用配置xml实现AOP">使用配置xml实现AOP</a><time datetime="2024-07-23T16:58:15.106Z" title="发表于 2024-07-24 00:58:15">2024-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/%E4%BD%BF%E7%94%A8%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0AOP/" title="使用接口实现AOP"><img src="/image/%E9%AC%BC%E5%88%80.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用接口实现AOP"/></a><div class="content"><a class="title" href="/2024/07/24/%E4%BD%BF%E7%94%A8%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0AOP/" title="使用接口实现AOP">使用接口实现AOP</a><time datetime="2024-07-23T16:58:15.103Z" title="发表于 2024-07-24 00:58:15">2024-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/AOP%E9%9D%A2%E5%90%91%E5%88%87%E7%89%87/" title="AOP面向切片"><img src="/image/%E6%B5%B7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AOP面向切片"/></a><div class="content"><a class="title" href="/2024/07/24/AOP%E9%9D%A2%E5%90%91%E5%88%87%E7%89%87/" title="AOP面向切片">AOP面向切片</a><time datetime="2024-07-23T16:58:15.101Z" title="发表于 2024-07-24 00:58:15">2024-07-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/24/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" title="自动装配"><img src="/image/%E9%AC%BC%E5%88%80.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自动装配"/></a><div class="content"><a class="title" href="/2024/07/24/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" title="自动装配">自动装配</a><time datetime="2024-07-23T16:58:04.085Z" title="发表于 2024-07-24 00:58:04">2024-07-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 業火の 向日葵</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
